@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import joblib
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder, RobustScaler
 from sklearn.compose import ColumnTransformer
 
 # Load the pre-trained Logistic Regression model
