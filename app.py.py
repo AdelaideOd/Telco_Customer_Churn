@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import joblib
-import numpy as np
 
 # Load the pre-trained Logistic Regression model
 try:
@@ -53,18 +52,16 @@ def user_input_features():
 # Gather user input
 input_df = user_input_features()
 
-# Ensure valid numeric inputs by converting any non-numeric values to NaN and then filling them with zeros
+# Ensure valid numeric inputs by explicitly converting to numeric and handling non-numeric cases
 try:
     # Step 1: Convert the columns to numeric explicitly, ensuring that they are in the right format.
-    input_df = input_df[selected_features].apply(pd.to_numeric, errors='coerce')  # Coerce non-numeric values to NaN
+    # Since we are using selectboxes and sliders, all values should already be numeric, but we can still check.
+    for feature in selected_features:
+        if input_df[feature].dtype not in [int, float]:
+            raise ValueError(f"Input for feature '{feature}' is not numeric.")
 
-    # Step 2: Handle NaN values by replacing them with zero.
-    input_df = input_df.fillna(0)  # Replace NaN values with 0 to avoid errors
-    
-    # Check if there are any remaining NaN values or invalid entries
-    if input_df.isnull().values.any():
-        raise ValueError("There are still missing values in the input data.")
-    
+    # No need to fill NaN values with zeros since all inputs should be numeric
+
     # Step 4: Make prediction using the model
     prediction = model.predict(input_df)
     prediction_proba = model.predict_proba(input_df)[0]  # Get probabilities for both classes
@@ -77,3 +74,4 @@ except ValueError as ve:
     st.error(f"Error during prediction: {ve}")
 except Exception as e:
     st.error(f"An unexpected error occurred: {e}")
+
