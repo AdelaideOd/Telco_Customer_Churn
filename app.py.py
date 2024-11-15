@@ -33,7 +33,7 @@ def user_input_features():
         [0, 1, 2],
         format_func=lambda x: ["No service", "DSL", "Fiber optic"][x]
     )
-    TotalCharges = st.sidebar.slider("Total Charges", 0.0, 10000.0, 1000.0)
+    TotalCharges = st.sidebar.text_input("Total Charges", "1000.0")
     PaymentMethod = st.sidebar.selectbox(
         "Payment Method",
         [0, 1, 2, 3],
