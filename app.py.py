@@ -72,8 +72,9 @@ try:
         raise ValueError("There are still missing values in the input data.")
 
     # Step 3: Ensure the data is in the correct type (numeric)
-    if not all(input_df.dtypes == 'float64'):
-        raise ValueError("Some input features are not in the correct numeric type.")
+    for feature in selected_features:
+        if input_df[feature].dtype not in [int, float]:
+            raise ValueError(f"Input for feature '{feature}' is not numeric. Current type: {input_df[feature].dtype}")
 
     # Step 4: Make prediction using the model
     prediction = model.predict(input_df)
