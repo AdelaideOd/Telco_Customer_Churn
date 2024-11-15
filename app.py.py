@@ -55,17 +55,24 @@ input_df = user_input_features()
 
 # Display user input
 st.subheader("User Input:")
+st.write(input_df)
 
 # Ensure valid numeric inputs by converting any non-numeric values to NaN and then filling them with zeros
 try:
     # Step 1: Convert the columns to numeric explicitly, ensuring that they are in the right format.
     input_df = input_df[selected_features].apply(pd.to_numeric, errors='coerce')  # Coerce non-numeric values to NaN
-    st.write("After conversion to numeric (handling errors):")
-    st.write(input_df)  # This is for visibility to check data after conversion
+    
+    # Logging input data for visibility
+    st.write("Data after conversion to numeric (handling errors):")
+    st.write(input_df)
 
     # Step 2: Handle NaN values by replacing them with zero.
     input_df = input_df.fillna(0)  # Replace NaN values with 0 to avoid errors
-
+    
+    # Check the types and see if there are any NaN values left
+    st.write("Data after handling NaN values (replaced with 0):")
+    st.write(input_df)
+    
     # Verify that all inputs are now numeric and have no NaN
     if input_df.isnull().values.any():
         raise ValueError("There are still missing values in the input data.")
