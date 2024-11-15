@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import joblib
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder, RobustScaler
+from sklearn.preprocessing import OneHotEncoder, RobustScaler
 from sklearn.compose import ColumnTransformer
 
 # Load the pre-trained Logistic Regression model
@@ -67,8 +67,8 @@ st.write(input_df)
 # Ensure valid numeric inputs by explicitly converting to numeric and handling non-numeric cases
 try:
     # Apply the same preprocessing as during training
-    categorical_columns = ['Contract', 'InternetService', 'PaymentMethod']
-    numerical_columns = ['SeniorCitizen', 'TechSupport', 'TotalCharges']
+    categorical_columns = ['SeniorCitizen', 'TechSupport', 'Contract', 'InternetService', 'PaymentMethod']
+    numerical_columns = ['TotalCharges']
     
     preprocessor = ColumnTransformer(
         transformers=[
