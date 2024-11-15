@@ -10,6 +10,12 @@ except Exception as e:
     st.error(f"Error loading the model: {e}")
     st.stop()
 
+# Display the logo
+st.image('bml_logo.png', width=200)
+
+# Display the heading
+st.title("BML Group")
+
 # Define the selected features for input
 selected_features = ['SeniorCitizen', 'TechSupport', 'Contract', 'InternetService', 'TotalCharges', 'PaymentMethod']
 
@@ -50,9 +56,6 @@ def user_input_features():
 
     return pd.DataFrame(data, index=[0])
 
-# Display the heading
-st.title("BML Group")
-
 # Gather user input
 input_df = user_input_features()
 
@@ -68,6 +71,10 @@ try:
         le = LabelEncoder()
         input_df[col] = le.fit_transform(input_df[col])
         label_encoders[col] = le
+
+    # Check data types before conversion
+    st.write("Data types before conversion:")
+    st.write(input_df.dtypes)
 
     # Step 1: Convert the columns to numeric explicitly, ensuring that they are in the right format.
     input_df = input_df[selected_features].apply(pd.to_numeric, errors='coerce')  # Coerce non-numeric values to NaN
