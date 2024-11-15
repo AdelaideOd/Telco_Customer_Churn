@@ -1,11 +1,12 @@
 import streamlit as st
 import pandas as pd
 import joblib
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
 
 # Load the pre-trained Logistic Regression model
 try:
-    model = joblib.load('logistic_regression_model1.pkl')
+    pipeline = joblib.load('logistic_regression_model1.pkl')
 except Exception as e:
     st.error(f"Error loading the model: {e}")
     st.stop()
@@ -65,31 +66,21 @@ st.write(input_df)
 
 # Ensure valid numeric inputs by explicitly converting to numeric and handling non-numeric cases
 try:
-    # Label encode categorical variables
-    label_encoders = {}
-    for col in ['Contract', 'InternetService', 'PaymentMethod']:
-        le = LabelEncoder()
-        input_df[col] = le.fit_transform(input_df[col])
-        label_encoders[col] = le
+    # Apply the same preprocessing as during training
+    categorical_columns = ['Contract', 'InternetService', 'PaymentMethod']
+    preprocessor = ColumnTransformer(
+        transformers=[
+            ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_columns)
+        ],
+        remainder='passthrough'
+    )
 
-    # Step 1: Convert the columns to numeric explicitly, ensuring that they are in the right format.
-    input_df = input_df[selected_features].apply(pd.to_numeric, errors='coerce')  # Coerce non-numeric values to NaN
-
-    # Step 2: Handle NaN values by replacing them with zero.
-    input_df = input_df.fillna(0)  # Replace NaN values with 0 to avoid errors
-    
-    # Check if there are any remaining NaN values or invalid entries
-    if input_df.isnull().values.any():
-        raise ValueError("There are still missing values in the input data.")
-
-    # Step 3: Ensure the data is in the correct type (numeric)
-    for feature in selected_features:
-        if input_df[feature].dtype not in [int, float]:
-            raise ValueError(f"Input for feature '{feature}' is not numeric. Current type: {input_df[feature].dtype}")
+    # Transform the input data
+    input_df_transformed = preprocessor.fit_transform(input_df)
 
     # Step 4: Make prediction using the model
-    prediction = model.predict(input_df)
-    prediction_proba = model.predict_proba(input_df)[0]  # Get probabilities for both classes
+    prediction = pipeline.predict(input_df_transformed)
+    prediction_proba = pipeline.predict_proba(input_df_transformed)[0]  # Get probabilities for both classes
 
     st.subheader("Prediction Result:")
     st.write(f"Churn Prediction: {'Yes' if prediction[0] == 1 else 'No'}")
