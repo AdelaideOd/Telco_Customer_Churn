@@ -2,11 +2,11 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# Load the pre-trained pipeline (model + preprocessor)
+# Load the full pipeline with preprocessing and model
 try:
-    pipeline = joblib.load('logistic_regression_model1.pkl')
+    pipeline = joblib.load('logistic_regression_pipeline.pkl')
 except Exception as e:
-    st.error(f"Error loading the model: {e}")
+    st.error(f"Error loading the pipeline: {e}")
     st.stop()
 
 # Display the logo
@@ -64,12 +64,9 @@ st.write(input_df)
 
 # Ensure valid numeric inputs by explicitly converting to numeric and handling non-numeric cases
 try:
-    # Use the pipeline's preprocessing to transform the input
-    input_df_transformed = pipeline.named_steps['preprocessor'].transform(input_df)
-
-    # Make prediction using the pipeline
-    prediction = pipeline.predict(input_df_transformed)
-    prediction_proba = pipeline.predict_proba(input_df_transformed)[0]  # Get probabilities for both classes
+    # Step 4: Make prediction using the model
+    prediction = pipeline.predict(input_df)
+    prediction_proba = pipeline.predict_proba(input_df)[0]  # Get probabilities for both classes
 
     st.subheader("Prediction Result:")
     st.write(f"Churn Prediction: {'Yes' if prediction[0] == 1 else 'No'}")
