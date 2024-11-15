@@ -76,3 +76,8 @@ try:
     st.subheader("Prediction Result:")
     st.write(f"Churn Prediction: {'Yes' if prediction[0] == 1 else 'No'}")
     st.write(f"Prediction Probability: Churn: {prediction_proba[1]:.2f}, No Churn: {prediction_proba[0]:.2f}")
+    except ValueError as ve:
+    st.error(f"Error during prediction: {ve}")
+except Exception as e:
+    st.error(f"An unexpected error occurred: {e}")
+
