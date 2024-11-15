@@ -55,25 +55,29 @@ input_df = user_input_features()
 
 # Display user input
 st.subheader("User Input:")
-st.write(input_df)
 
 # Ensure valid numeric inputs by converting any non-numeric values to NaN and then filling them with zeros
 try:
-    # Explicitly convert columns to numeric and handle errors
-    input_df = input_df[selected_features].apply(pd.to_numeric, errors='coerce')  # Convert to numeric, coerce invalid values to NaN
-    input_df = input_df.fillna(0)  # Replace NaN values with 0 to avoid errors in prediction
+    # Step 1: Convert the columns to numeric explicitly, ensuring that they are in the right format.
+    input_df = input_df[selected_features].apply(pd.to_numeric, errors='coerce')  # Coerce non-numeric values to NaN
+    st.write("After conversion to numeric (handling errors):")
+    st.write(input_df)  # This is for visibility to check data after conversion
 
-    # Ensure no NaN values exist in the input
+    # Step 2: Handle NaN values by replacing them with zero.
+    input_df = input_df.fillna(0)  # Replace NaN values with 0 to avoid errors
+
+    # Verify that all inputs are now numeric and have no NaN
     if input_df.isnull().values.any():
-        raise ValueError("There are missing values in the input data.")
+        raise ValueError("There are still missing values in the input data.")
 
-    # Make prediction using the model
+    # Step 3: Make prediction using the model
     prediction = model.predict(input_df)
     prediction_proba = model.predict_proba(input_df)[0]  # Get probabilities for both classes
 
     st.subheader("Prediction Result:")
     st.write(f"Churn Prediction: {'Yes' if prediction[0] == 1 else 'No'}")
     st.write(f"Prediction Probability: Churn: {prediction_proba[1]:.2f}, No Churn: {prediction_proba[0]:.2f}")
+
 except ValueError as ve:
     st.error(f"Error during prediction: {ve}")
 except Exception as e:
