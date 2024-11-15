@@ -1,18 +1,20 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import numpy as np
 
-# Load the pre-trained Logistic Regression model (including preprocessing steps)
+# Load the pre-trained model pipeline (model + preprocessing steps)
 try:
-    model = joblib.load('logistic_regression_pipeline.pkl')  # Ensure you're loading the full pipeline
+    model = joblib.load('logistic_regression_pipeline.pkl')  # Load the full pipeline
 except Exception as e:
     st.sidebar.error(f"Error loading model: {e}")
     st.stop()
 
-# Define the list of selected features
+# Define the list of selected features (must match the model's training features)
 selected_features = ['SeniorCitizen', 'TechSupport', 'Contract', 'InternetService', 'TotalCharges', 'PaymentMethod']
 
 def user_input_features():
+    """Function to collect input from the user through the sidebar"""
     SeniorCitizen = st.sidebar.selectbox("Senior Citizen", [0, 1], format_func=lambda x: "Yes" if x == 1 else "No")
     TechSupport = st.sidebar.selectbox("Tech Support", [0, 1], format_func=lambda x: "Yes" if x == 1 else "No")
     Contract = st.sidebar.selectbox(
@@ -37,6 +39,7 @@ def user_input_features():
         ][x]
     )
     
+    # Collect user input into a DataFrame
     data = {
         "SeniorCitizen": SeniorCitizen,
         "TechSupport": TechSupport,
@@ -48,30 +51,19 @@ def user_input_features():
 
     return pd.DataFrame(data, index=[0])
 
-# Gather user input
+# Get the user's input
 input_df = user_input_features()
 
-# Ensure the input data contains the selected features, in the correct order
+# Ensure the input data contains the selected features in the correct order
 input_df = input_df[selected_features]
 
-# Handle missing values by filling with 0 and convert to correct types
-input_df = input_df.fillna(0)
-
-# Ensure the data types are correct before passing to the model
-input_df['TotalCharges'] = input_df['TotalCharges'].astype(float)
-input_df['SeniorCitizen'] = input_df['SeniorCitizen'].astype(int)
-input_df['TechSupport'] = input_df['TechSupport'].astype(int)
-input_df['Contract'] = input_df['Contract'].astype(int)
-input_df['InternetService'] = input_df['InternetService'].astype(int)
-input_df['PaymentMethod'] = input_df['PaymentMethod'].astype(int)
-
-# Display user input
+# Display user input for review
 st.subheader("User Input:")
 st.write(input_df)
 
-# Predict using the trained model (which includes preprocessing and classifier)
+# Prediction
 try:
-    # Predict using the whole pipeline
+    # Use the pre-trained model to make predictions
     prediction = model.predict(input_df)
     prediction_proba = model.predict_proba(input_df)[0]  # Get probabilities for both classes
 
