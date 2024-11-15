@@ -1,16 +1,17 @@
 import streamlit as st
 import pandas as pd
-import pickle
+import joblib
 
 # Load the pre-trained Logistic Regression model
 try:
-    model = pickle.load(open('logistic_regression_model.pkl', 'rb'))
+    model = joblib.load('logistic_regression_model.pkl')
     st.sidebar.success("Model loaded successfully!")
+    st.sidebar.write(f"Model type: {type(model)}")  # This will show the model's type
 except Exception as e:
     st.sidebar.error(f"Error loading model: {e}")
     st.stop()
 
-# Define the list of selected features (same as in training)
+# Define the list of selected features
 selected_features = ['SeniorCitizen', 'TechSupport', 'Contract', 'InternetService', 'TotalCharges', 'PaymentMethod']
 
 def user_input_features():
@@ -61,11 +62,15 @@ st.write(input_df)
 
 # Predict using the trained model
 try:
-    prediction = model.predict(input_df)
-    prediction_proba = model.predict_proba(input_df)[0]  # Get probabilities for both classes
+    # Check if the model is the correct type
+    if hasattr(model, 'predict'):
+        prediction = model.predict(input_df)
+        prediction_proba = model.predict_proba(input_df)[0]  # Get probabilities for both classes
 
-    st.subheader("Prediction Result:")
-    st.write(f"Churn Prediction: {'Yes' if prediction[0] == 1 else 'No'}")
-    st.write(f"Prediction Probability: Churn: {prediction_proba[1]:.2f}, No Churn: {prediction_proba[0]:.2f}")
+        st.subheader("Prediction Result:")
+        st.write(f"Churn Prediction: {'Yes' if prediction[0] == 1 else 'No'}")
+        st.write(f"Prediction Probability: Churn: {prediction_proba[1]:.2f}, No Churn: {prediction_proba[0]:.2f}")
+    else:
+        st.error("Loaded model is not a valid LogisticRegression model.")
 except Exception as e:
     st.error(f"An error occurred during prediction: {e}")
