@@ -62,22 +62,26 @@ try:
     # Step 1: Convert the columns to numeric explicitly, ensuring that they are in the right format.
     input_df = input_df[selected_features].apply(pd.to_numeric, errors='coerce')  # Coerce non-numeric values to NaN
 
+    # Log the intermediate state of the data
+    st.write("Data after conversion to numeric (handling errors):")
+    st.write(input_df)
+
     # Step 2: Handle NaN values by replacing them with zero.
     input_df = input_df.fillna(0)  # Replace NaN values with 0 to avoid errors
     
-    # Verify that all inputs are now numeric and have no NaN
+    # Check if there are any remaining NaN values or invalid entries
     if input_df.isnull().values.any():
         raise ValueError("There are still missing values in the input data.")
-
-    # Step 3: Make prediction using the model
+    
+    # Step 4: Make prediction using the model
     prediction = model.predict(input_df)
     prediction_proba = model.predict_proba(input_df)[0]  # Get probabilities for both classes
 
     st.subheader("Prediction Result:")
     st.write(f"Churn Prediction: {'Yes' if prediction[0] == 1 else 'No'}")
     st.write(f"Prediction Probability: Churn: {prediction_proba[1]:.2f}, No Churn: {prediction_proba[0]:.2f}")
-    except ValueError as ve:
+
+except ValueError as ve:
     st.error(f"Error during prediction: {ve}")
 except Exception as e:
     st.error(f"An unexpected error occurred: {e}")
-
