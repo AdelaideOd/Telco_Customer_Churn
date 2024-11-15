@@ -53,33 +53,17 @@ def user_input_features():
 # Gather user input
 input_df = user_input_features()
 
-# Display user input
-st.subheader("User Input:")
-st.write(input_df)
-
 # Ensure valid numeric inputs by converting any non-numeric values to NaN and then filling them with zeros
 try:
     # Step 1: Convert the columns to numeric explicitly, ensuring that they are in the right format.
     input_df = input_df[selected_features].apply(pd.to_numeric, errors='coerce')  # Coerce non-numeric values to NaN
 
-    # Log the intermediate state of the data
-    st.write("Data after conversion to numeric (handling errors):")
-    st.write(input_df)
-
     # Step 2: Handle NaN values by replacing them with zero.
     input_df = input_df.fillna(0)  # Replace NaN values with 0 to avoid errors
-    
-    # Log the data after NaN handling
-    st.write("Data after handling NaN values (replaced with 0):")
-    st.write(input_df)
     
     # Check if there are any remaining NaN values or invalid entries
     if input_df.isnull().values.any():
         raise ValueError("There are still missing values in the input data.")
-
-    # Step 3: Ensure the data is in the correct type (numeric)
-    st.write("Data types of input features:")
-    st.write(input_df.dtypes)
     
     # Step 4: Make prediction using the model
     prediction = model.predict(input_df)
