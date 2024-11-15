@@ -57,9 +57,19 @@ input_df = user_input_features()
 # Ensure the input data contains the selected features in the correct order
 input_df = input_df[selected_features]
 
-# Handle NaN or missing values in the input
-input_df = input_df.apply(pd.to_numeric, errors='coerce')  # Convert to numeric and handle non-numeric gracefully
-input_df = input_df.fillna(0)  # Replace any NaN values with 0 or other suitable values
+# Debugging step: Check and log the input data types
+st.write("Input Data Types:")
+st.write(input_df.dtypes)
+
+# Convert the input data to numeric values to ensure consistency
+input_df = input_df.apply(pd.to_numeric, errors='coerce')  # Convert all to numeric and coerce invalid data to NaN
+
+# Debugging step: Check for NaN values after conversion
+st.write("Data after Conversion to Numeric (with NaNs replaced by 0):")
+st.write(input_df)
+
+# Handle any NaN values by replacing them with 0 (or another appropriate default)
+input_df = input_df.fillna(0)
 
 # Display user input for review
 st.subheader("User Input:")
@@ -67,7 +77,7 @@ st.write(input_df)
 
 # Prediction
 try:
-    # Use the pre-trained model to make predictions
+    # Ensure the input dataframe is in the correct format for the model
     prediction = model.predict(input_df)
     prediction_proba = model.predict_proba(input_df)[0]  # Get probabilities for both classes
 
