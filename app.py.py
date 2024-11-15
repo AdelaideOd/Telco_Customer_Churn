@@ -2,9 +2,9 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# Load the pre-trained Logistic Regression model
+# Load the pre-trained Logistic Regression model (updated filename)
 try:
-    model = joblib.load('logistic_regression_model.pkl')
+    model = joblib.load('logistic_regression_pipeline.pkl')  # Make sure this matches the model file name
     st.sidebar.success("Model loaded successfully!")
     st.sidebar.write(f"Model type: {type(model)}")  # This will show the model's type
 except Exception as e:
