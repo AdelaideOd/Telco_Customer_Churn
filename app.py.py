@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import joblib
+from sklearn.preprocessing import LabelEncoder
 
 # Load the pre-trained Logistic Regression model
 try:
@@ -61,6 +62,13 @@ st.write(input_df)
 
 # Ensure valid numeric inputs by explicitly converting to numeric and handling non-numeric cases
 try:
+    # Label encode categorical variables
+    label_encoders = {}
+    for col in ['Contract', 'InternetService', 'PaymentMethod']:
+        le = LabelEncoder()
+        input_df[col] = le.fit_transform(input_df[col])
+        label_encoders[col] = le
+
     # Step 1: Convert the columns to numeric explicitly, ensuring that they are in the right format.
     input_df = input_df[selected_features].apply(pd.to_numeric, errors='coerce')  # Coerce non-numeric values to NaN
 
