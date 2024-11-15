@@ -3,18 +3,18 @@ import pandas as pd
 import joblib
 import numpy as np
 
-# Load the pre-trained model pipeline (model + preprocessing steps)
+# Load the pre-trained Logistic Regression model
 try:
-    model = joblib.load('logistic_regression_pipeline.pkl')  # Load the full pipeline
+    model = joblib.load('logistic_regression_pipeline.pkl')
 except Exception as e:
-    st.sidebar.error(f"Error loading model: {e}")
+    st.error(f"Error loading the model: {e}")
     st.stop()
 
-# Define the list of selected features (must match the model's training features)
+# Define the selected features for input
 selected_features = ['SeniorCitizen', 'TechSupport', 'Contract', 'InternetService', 'TotalCharges', 'PaymentMethod']
 
+# Function to gather user input
 def user_input_features():
-    """Function to collect input from the user through the sidebar"""
     SeniorCitizen = st.sidebar.selectbox("Senior Citizen", [0, 1], format_func=lambda x: "Yes" if x == 1 else "No")
     TechSupport = st.sidebar.selectbox("Tech Support", [0, 1], format_func=lambda x: "Yes" if x == 1 else "No")
     Contract = st.sidebar.selectbox(
@@ -39,7 +39,6 @@ def user_input_features():
         ][x]
     )
     
-    # Collect user input into a DataFrame
     data = {
         "SeniorCitizen": SeniorCitizen,
         "TechSupport": TechSupport,
@@ -51,33 +50,18 @@ def user_input_features():
 
     return pd.DataFrame(data, index=[0])
 
-# Get the user's input
+# Gather user input
 input_df = user_input_features()
 
-# Ensure the input data contains the selected features in the correct order
-input_df = input_df[selected_features]
-
-# Debugging step: Check and log the input data types
-st.write("Input Data Types:")
-st.write(input_df.dtypes)
-
-# Convert the input data to numeric values to ensure consistency
-input_df = input_df.apply(pd.to_numeric, errors='coerce')  # Convert all to numeric and coerce invalid data to NaN
-
-# Debugging step: Check for NaN values after conversion
-st.write("Data after Conversion to Numeric (with NaNs replaced by 0):")
-st.write(input_df)
-
-# Handle any NaN values by replacing them with 0 (or another appropriate default)
-input_df = input_df.fillna(0)
-
-# Display user input for review
+# Display user input
 st.subheader("User Input:")
-st.write(input_df)
 
-# Prediction
+# Handle potential errors during prediction
 try:
-    # Ensure the input dataframe is in the correct format for the model
+    # Ensure the input data is in the right format
+    input_df = input_df[selected_features].apply(pd.to_numeric, errors='coerce').fillna(0)
+
+    # Make prediction using the model
     prediction = model.predict(input_df)
     prediction_proba = model.predict_proba(input_df)[0]  # Get probabilities for both classes
 
@@ -85,6 +69,4 @@ try:
     st.write(f"Churn Prediction: {'Yes' if prediction[0] == 1 else 'No'}")
     st.write(f"Prediction Probability: Churn: {prediction_proba[1]:.2f}, No Churn: {prediction_proba[0]:.2f}")
 except Exception as e:
-    st.error("An error occurred during prediction. Please check your input values.")
-    # Log the error for debugging (you can remove this line for production)
-    st.error(f"Error details: {e}")
+    st.error(f"An error occurred during prediction. Please check your input values. Error: {e}")
