@@ -61,17 +61,9 @@ st.write(input_df)
 try:
     # Step 1: Convert the columns to numeric explicitly, ensuring that they are in the right format.
     input_df = input_df[selected_features].apply(pd.to_numeric, errors='coerce')  # Coerce non-numeric values to NaN
-    
-    # Logging input data for visibility
-    st.write("Data after conversion to numeric (handling errors):")
-    st.write(input_df)
 
     # Step 2: Handle NaN values by replacing them with zero.
     input_df = input_df.fillna(0)  # Replace NaN values with 0 to avoid errors
-    
-    # Check the types and see if there are any NaN values left
-    st.write("Data after handling NaN values (replaced with 0):")
-    st.write(input_df)
     
     # Verify that all inputs are now numeric and have no NaN
     if input_df.isnull().values.any():
@@ -84,8 +76,3 @@ try:
     st.subheader("Prediction Result:")
     st.write(f"Churn Prediction: {'Yes' if prediction[0] == 1 else 'No'}")
     st.write(f"Prediction Probability: Churn: {prediction_proba[1]:.2f}, No Churn: {prediction_proba[0]:.2f}")
-
-except ValueError as ve:
-    st.error(f"Error during prediction: {ve}")
-except Exception as e:
-    st.error(f"An unexpected error occurred: {e}")
