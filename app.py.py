@@ -1,16 +1,16 @@
 import streamlit as st
 import pandas as pd
-import joblib  # Use joblib instead of pickle
+import pickle
 
 # Load the pre-trained Logistic Regression model
 try:
-    model = joblib.load('logistic_regression_model.pkl')  # Load with joblib
+    model = pickle.load(open('logistic_regression_model.pkl', 'rb'))
     st.sidebar.success("Model loaded successfully!")
 except Exception as e:
     st.sidebar.error(f"Error loading model: {e}")
     st.stop()
 
-# Define the list of selected features
+# Define the list of selected features (same as in training)
 selected_features = ['SeniorCitizen', 'TechSupport', 'Contract', 'InternetService', 'TotalCharges', 'PaymentMethod']
 
 def user_input_features():
