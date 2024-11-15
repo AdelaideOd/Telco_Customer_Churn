@@ -57,6 +57,10 @@ input_df = user_input_features()
 # Ensure the input data contains the selected features in the correct order
 input_df = input_df[selected_features]
 
+# Handle NaN or missing values in the input
+input_df = input_df.apply(pd.to_numeric, errors='coerce')  # Convert to numeric and handle non-numeric gracefully
+input_df = input_df.fillna(0)  # Replace any NaN values with 0 or other suitable values
+
 # Display user input for review
 st.subheader("User Input:")
 st.write(input_df)
@@ -71,4 +75,6 @@ try:
     st.write(f"Churn Prediction: {'Yes' if prediction[0] == 1 else 'No'}")
     st.write(f"Prediction Probability: Churn: {prediction_proba[1]:.2f}, No Churn: {prediction_proba[0]:.2f}")
 except Exception as e:
-    st.error(f"An error occurred during prediction: {e}")
+    st.error("An error occurred during prediction. Please check your input values.")
+    # Log the error for debugging (you can remove this line for production)
+    st.error(f"Error details: {e}")
