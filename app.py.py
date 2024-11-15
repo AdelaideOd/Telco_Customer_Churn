@@ -4,7 +4,7 @@ import pickle
 
 # Load the pre-trained Logistic Regression model
 try:
-    model = pickle.load(open('logistic_model.pkl', 'rb'))
+model = pickle.load(open('logistic_regression_model.pkl', 'rb'))
     st.sidebar.success("Model loaded successfully!")
 except Exception as e:
     st.sidebar.error(f"Error loading model: {e}")
