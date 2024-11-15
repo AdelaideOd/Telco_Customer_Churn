@@ -54,10 +54,10 @@ input_df = user_input_features()
 # Ensure the input data contains the selected features, in the correct order
 input_df = input_df[selected_features]
 
-# Ensure there are no missing values
+# Handle missing values by filling with 0 and convert to correct types
 input_df = input_df.fillna(0)
 
-# Convert the data types to the correct ones (in case they are not correct)
+# Ensure the data types are correct before passing to the model
 input_df['TotalCharges'] = input_df['TotalCharges'].astype(float)
 input_df['SeniorCitizen'] = input_df['SeniorCitizen'].astype(int)
 input_df['TechSupport'] = input_df['TechSupport'].astype(int)
