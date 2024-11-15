@@ -2,11 +2,9 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# Load the pre-trained Logistic Regression model
+# Load the pre-trained Logistic Regression model (including preprocessing steps)
 try:
-    model = joblib.load('logistic_regression_model.pkl')
-    st.sidebar.success("Model loaded successfully!")
-    st.sidebar.write(f"Model type: {type(model)}")  # This will show the model's type
+    model = joblib.load('logistic_regression_pipeline.pkl')  # Make sure you're loading the whole pipeline
 except Exception as e:
     st.sidebar.error(f"Error loading model: {e}")
     st.stop()
@@ -71,17 +69,14 @@ input_df['PaymentMethod'] = input_df['PaymentMethod'].astype(int)
 st.subheader("User Input:")
 st.write(input_df)
 
-# Predict using the trained model
+# Predict using the trained model (which includes preprocessing and classifier)
 try:
-    # Check if the model is the correct type
-    if hasattr(model, 'predict'):
-        prediction = model.predict(input_df)
-        prediction_proba = model.predict_proba(input_df)[0]  # Get probabilities for both classes
+    # Predict using the whole pipeline
+    prediction = model.predict(input_df)
+    prediction_proba = model.predict_proba(input_df)[0]  # Get probabilities for both classes
 
-        st.subheader("Prediction Result:")
-        st.write(f"Churn Prediction: {'Yes' if prediction[0] == 1 else 'No'}")
-        st.write(f"Prediction Probability: Churn: {prediction_proba[1]:.2f}, No Churn: {prediction_proba[0]:.2f}")
-    else:
-        st.error("Loaded model is not a valid LogisticRegression model.")
+    st.subheader("Prediction Result:")
+    st.write(f"Churn Prediction: {'Yes' if prediction[0] == 1 else 'No'}")
+    st.write(f"Prediction Probability: Churn: {prediction_proba[1]:.2f}, No Churn: {prediction_proba[0]:.2f}")
 except Exception as e:
     st.error(f"An error occurred during prediction: {e}")
