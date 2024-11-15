@@ -5,9 +5,6 @@ import pickle
 # Load the pre-trained Logistic Regression model
 try:
     model = pickle.load(open('logistic_regression_model.pkl', 'rb'))
-    # Check if the model has 'predict' method
-    if not hasattr(model, 'predict'):
-        raise ValueError("The loaded object is not a valid model.")
     st.sidebar.success("Model loaded successfully!")
 except Exception as e:
     st.sidebar.error(f"Error loading model: {e}")
@@ -55,7 +52,7 @@ def user_input_features():
 # Gather user input
 input_df = user_input_features()
 
-# Align features with the model's expected input
+# Ensure the input data contains the selected features, in the correct order
 input_df = input_df[selected_features]
 
 # Display user input
@@ -64,8 +61,8 @@ st.write(input_df)
 
 # Predict using the trained model
 try:
-    prediction = model.predict(input_df)  # Ensure model is being used for prediction
-    prediction_proba = model.predict_proba(input_df)[0]  # Ensure model is being used for probability
+    prediction = model.predict(input_df)
+    prediction_proba = model.predict_proba(input_df)[0]  # Get probabilities for both classes
 
     st.subheader("Prediction Result:")
     st.write(f"Churn Prediction: {'Yes' if prediction[0] == 1 else 'No'}")
