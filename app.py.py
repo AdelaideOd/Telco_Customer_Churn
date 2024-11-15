@@ -1,10 +1,8 @@
 import streamlit as st
 import pandas as pd
 import joblib
-from sklearn.preprocessing import OneHotEncoder, RobustScaler
-from sklearn.compose import ColumnTransformer
 
-# Load the pre-trained Logistic Regression model
+# Load the pre-trained pipeline (model + preprocessor)
 try:
     pipeline = joblib.load('logistic_regression_model1.pkl')
 except Exception as e:
@@ -66,21 +64,10 @@ st.write(input_df)
 
 # Ensure valid numeric inputs by explicitly converting to numeric and handling non-numeric cases
 try:
-    # Apply the same preprocessing as during training
-    categorical_columns = ['SeniorCitizen', 'TechSupport', 'Contract', 'InternetService', 'PaymentMethod']
-    numerical_columns = ['TotalCharges']
-    
-    preprocessor = ColumnTransformer(
-        transformers=[
-            ('num', RobustScaler(), numerical_columns),
-            ('cat', OneHotEncoder(handle_unknown='ignore'), categorical_columns)
-        ]
-    )
+    # Use the pipeline's preprocessing to transform the input
+    input_df_transformed = pipeline.named_steps['preprocessor'].transform(input_df)
 
-    # Transform the input data
-    input_df_transformed = preprocessor.fit_transform(input_df)
-
-    # Step 4: Make prediction using the model
+    # Make prediction using the pipeline
     prediction = pipeline.predict(input_df_transformed)
     prediction_proba = pipeline.predict_proba(input_df_transformed)[0]  # Get probabilities for both classes
 
