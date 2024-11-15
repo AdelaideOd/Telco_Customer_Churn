@@ -53,11 +53,7 @@ def user_input_features():
 input_df = user_input_features()
 
 # Align features with the model's expected input
-try:
-    input_df = input_df[model.feature_names_in_]
-except Exception as e:
-    st.error(f"Feature alignment failed: {e}")
-    st.stop()
+input_df = input_df[selected_features]
 
 # Display user input
 st.subheader("User Input:")
