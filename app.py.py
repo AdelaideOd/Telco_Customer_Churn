@@ -4,7 +4,7 @@ import joblib
 
 # Load the pre-trained Logistic Regression model (including preprocessing steps)
 try:
-    model = joblib.load('logistic_regression_pipeline.pkl')  # Make sure you're loading the whole pipeline
+    model = joblib.load('logistic_regression_pipeline.pkl')  # Ensure you're loading the full pipeline
 except Exception as e:
     st.sidebar.error(f"Error loading model: {e}")
     st.stop()
@@ -57,21 +57,13 @@ input_df = input_df[selected_features]
 # Ensure there are no missing values
 input_df = input_df.fillna(0)
 
-# Check data types
-st.write("Data types of input features:")
-st.write(input_df.dtypes)
-
-# Ensure the correct data types
+# Convert the data types to the correct ones (in case they are not correct)
 input_df['TotalCharges'] = input_df['TotalCharges'].astype(float)
 input_df['SeniorCitizen'] = input_df['SeniorCitizen'].astype(int)
 input_df['TechSupport'] = input_df['TechSupport'].astype(int)
 input_df['Contract'] = input_df['Contract'].astype(int)
 input_df['InternetService'] = input_df['InternetService'].astype(int)
 input_df['PaymentMethod'] = input_df['PaymentMethod'].astype(int)
-
-# Check if there are any NaN values after conversion
-st.write("Checking for NaN values in the input:")
-st.write(input_df.isna().sum())
 
 # Display user input
 st.subheader("User Input:")
