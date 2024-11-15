@@ -69,9 +69,17 @@ try:
     # Step 2: Handle NaN values by replacing them with zero.
     input_df = input_df.fillna(0)  # Replace NaN values with 0 to avoid errors
     
+    # Log the data after NaN handling
+    st.write("Data after handling NaN values (replaced with 0):")
+    st.write(input_df)
+    
     # Check if there are any remaining NaN values or invalid entries
     if input_df.isnull().values.any():
         raise ValueError("There are still missing values in the input data.")
+
+    # Step 3: Ensure the data is in the correct type (numeric)
+    st.write("Data types of input features:")
+    st.write(input_df.dtypes)
     
     # Step 4: Make prediction using the model
     prediction = model.predict(input_df)
