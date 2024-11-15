@@ -76,12 +76,20 @@ try:
     st.write("Data types before conversion:")
     st.write(input_df.dtypes)
 
+    # Log input data before conversion
+    st.write("Input data before conversion:")
+    st.write(input_df)
+
     # Step 1: Convert the columns to numeric explicitly, ensuring that they are in the right format.
     input_df = input_df[selected_features].apply(pd.to_numeric, errors='coerce')  # Coerce non-numeric values to NaN
 
     # Check data types after conversion
     st.write("Data types after conversion:")
     st.write(input_df.dtypes)
+
+    # Log input data after conversion
+    st.write("Input data after conversion:")
+    st.write(input_df)
 
     # Step 2: Handle NaN values by replacing them with zero.
     input_df = input_df.fillna(0)  # Replace NaN values with 0 to avoid errors
