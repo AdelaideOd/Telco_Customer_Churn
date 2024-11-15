@@ -1,10 +1,10 @@
 import streamlit as st
 import pandas as pd
-import pickle
+import joblib  # Use joblib instead of pickle
 
 # Load the pre-trained Logistic Regression model
 try:
-    model = pickle.load(open('logistic_regression_model.pkl', 'rb'))
+    model = joblib.load('logistic_regression_model.pkl')  # Load with joblib
     st.sidebar.success("Model loaded successfully!")
 except Exception as e:
     st.sidebar.error(f"Error loading model: {e}")
