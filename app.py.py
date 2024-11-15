@@ -2,9 +2,9 @@ import streamlit as st
 import pandas as pd
 import joblib
 
-# Load the pre-trained Logistic Regression model (updated filename)
+# Load the pre-trained Logistic Regression model
 try:
-    model = joblib.load('logistic_regression_pipeline.pkl')  # Make sure this matches the model file name
+    model = joblib.load('logistic_regression_model.pkl')
     st.sidebar.success("Model loaded successfully!")
     st.sidebar.write(f"Model type: {type(model)}")  # This will show the model's type
 except Exception as e:
@@ -55,6 +55,17 @@ input_df = user_input_features()
 
 # Ensure the input data contains the selected features, in the correct order
 input_df = input_df[selected_features]
+
+# Ensure there are no missing values
+input_df = input_df.fillna(0)
+
+# Ensure the correct data types
+input_df['TotalCharges'] = input_df['TotalCharges'].astype(float)
+input_df['SeniorCitizen'] = input_df['SeniorCitizen'].astype(int)
+input_df['TechSupport'] = input_df['TechSupport'].astype(int)
+input_df['Contract'] = input_df['Contract'].astype(int)
+input_df['InternetService'] = input_df['InternetService'].astype(int)
+input_df['PaymentMethod'] = input_df['PaymentMethod'].astype(int)
 
 # Display user input
 st.subheader("User Input:")
