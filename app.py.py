@@ -57,6 +57,10 @@ input_df = input_df[selected_features]
 # Ensure there are no missing values
 input_df = input_df.fillna(0)
 
+# Check data types
+st.write("Data types of input features:")
+st.write(input_df.dtypes)
+
 # Ensure the correct data types
 input_df['TotalCharges'] = input_df['TotalCharges'].astype(float)
 input_df['SeniorCitizen'] = input_df['SeniorCitizen'].astype(int)
@@ -64,6 +68,10 @@ input_df['TechSupport'] = input_df['TechSupport'].astype(int)
 input_df['Contract'] = input_df['Contract'].astype(int)
 input_df['InternetService'] = input_df['InternetService'].astype(int)
 input_df['PaymentMethod'] = input_df['PaymentMethod'].astype(int)
+
+# Check if there are any NaN values after conversion
+st.write("Checking for NaN values in the input:")
+st.write(input_df.isna().sum())
 
 # Display user input
 st.subheader("User Input:")
