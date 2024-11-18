@@ -54,8 +54,6 @@ Trained and evaluated multiple models, including:
 ### 5. Deployment  
 - Deployed the Logistic Regression model using **Streamlit**, providing an interactive web app for churn prediction.  
 
----
-
 ## Usage   
 https://telcocustomerchurn--bml.streamlit.app/
 
@@ -63,7 +61,7 @@ https://telcocustomerchurn--bml.streamlit.app/
 
 ## Technologies Used  
 - **Programming Language:** Python  
-- **Libraries:** Pandas, NumPy, Scikit-learn, XGBoost, Matplotlib, Seaborn, Streamlit  
+- **Libraries:** Pandas, NumPy, Scikit-learn, , Matplotlib, Seaborn, Streamlit  
 - **Deployment:** Streamlit  
 
 ---
@@ -77,5 +75,5 @@ https://telcocustomerchurn--bml.streamlit.app/
 ---
 
 ## Acknowledgments  
-This project was part of the **Generation Ghana Data Analytics Fellowship** and supported by **Blossom Academy**.  
+This project was part of the **Generation Ghana and Blossom Academy Data Analytics Fellowship** and sponsored by the **MasterCard Foundation**.  
 Special thanks to our instructors for their guidance.  
