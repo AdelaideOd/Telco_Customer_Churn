@@ -58,7 +58,6 @@ Trained and evaluated multiple models, including:
 
 ## Usage   
 https://telcocustomerchurn--bml.streamlit.app/
-![image](https://github.com/user-attachments/assets/0061103b-0ec7-460a-86ec-be99f6f7bfcb)
 
 ---
 
