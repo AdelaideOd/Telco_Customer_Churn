@@ -1,4 +1,4 @@
-# Customer Churn Prediction for BML Group  📊
+# Customer Churn Prediction for BML Group  📊 🌐📡 📶
 
 ## About BML Group  
 BML Group is a fictional telecom company at the forefront of innovation, dedicated to enhancing connectivity and improving customer experiences. With a focus on customer-centric solutions, BML Group strives to deliver exceptional value while fostering long-term relationships with its subscribers.  
