@@ -1,25 +1,27 @@
-# Customer Churn Prediction for BML Group 🌐📡 📶
+# BML Group Customer Churn Prediction 🌐📡 📶 
 <div align="center">
     <img src="bml_logo.png" alt="BML Logo" width="200">
 </div>
 
 ## About BML Group  
-BML Group is a fictional telecom company at the forefront of innovation, dedicated to enhancing connectivity and improving customer experiences. With a focus on customer-centric solutions, BML Group strives to deliver exceptional value while fostering long-term relationships with its subscribers.  
-
-## Introduction  
-This project aims to predict customer churn for a telecom company using machine learning techniques. Customer churn, where customers stop using a service, is a critical problem in the telecom industry. By identifying at-risk customers, telecom companies can take proactive measures to improve retention and customer satisfaction. 
+`BML Group` is a fictional telecom company at the forefront of innovation, dedicated to enhancing connectivity and improving customer experiences. With a focus on customer-centric solutions, `BML Group` strives to deliver exceptional value while fostering long-term relationships with its subscribers.  
 
 ## About This Project  
 
-This repository is part of a collaborative project created by a group of Data Analysts as a capstone for the Blossom Academy Data Analytics Fellowship. Our goal was to develop predictive models to assess **customer churn** in the telecom industry. This project served as both a practical application of our skills and a showcase of the power of data-driven decision-making.  
+This repository is part of a collaborative project created by a group of Data Analysts as a capstone project for the Blossom Academy Data Analytics Fellowship. Our goal was to develop predictive models to assess **customer churn** in the `BML Group`. This project served as both a practical application of our skills and a showcase of the power of data-driven decision-making. 
 
-Through rigorous analysis and modeling, we aimed to deliver actionable insights that can help telecom companies proactively identify at-risk customers and implement effective retention strategies. The project was also proudly presented during our graduation ceremony, highlighting our dedication and teamwork in addressing real-world challenges.
+Through rigorous analysis and modelling, we aimed to deliver actionable insights that can help the `BML Group` proactively identify at-risk customers and implement effective retention strategies. The project was also proudly presented during our graduation ceremony, highlighting our dedication and teamwork in addressing real-world challenges.
 
 ### Connect with Us on LinkedIn
 Scan the QR code below to visit our LinkedIn profiles:
 
 <img src="Our%20LinkedIn%20Profiles.png" alt="Our LinkedIn Profiles" width="200">
 
+
+---
+
+## Introduction  
+Customer churn, where customers stop using a service, is a critical problem in the telecom industry. By identifying at-risk customers, the `BML Group` can proactively improve retention and customer satisfaction. 
 
 ---
 
@@ -72,14 +74,14 @@ Trained and evaluated multiple models, including:
 ### 5. Deployment  
 - Deployed the Logistic Regression model using **Streamlit**, providing an interactive web app for churn prediction.  
 
-Click the link to experience the deployment aspect of our project, we’ve created a web application which you can explore by clicking the link below:
-https://telcocustomerchurn--bml.streamlit.app/
+Click the link to experience the deployment aspect of our project, we’ve created a web application which you can explore by clicking this link
+[BML Group Web App](https://telcocustomerchurn--bml.streamlit.app/)
 
 ---
 
 ## Technologies Used  
 - **Programming Language:** Python  
-- **Libraries:** Pandas, NumPy, Scikit-learn, , Matplotlib, Seaborn, Streamlit  
+- **Libraries:** Pandas, NumPy, Scikit-learn, Matplotlib, Seaborn, Streamlit  
 - **Deployment:** Streamlit  
 
 ---
