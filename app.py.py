@@ -20,43 +20,43 @@ selected_features = ['SeniorCitizen', 'TechSupport', 'Contract', 'InternetServic
 
 # Function to gather user input
 def user_input_features():
-    st.sidebar.header('User Input Features')
+    st.header('User Input Features')
 
-    st.sidebar.write('Please select the values for each feature below. The selected values will be displayed in the table to the right.')
+    st.write('Please select the values for each feature below. The selected values will be displayed in the table to the right.')
 
-    st.sidebar.subheader('1. Senior Citizen')
-    st.sidebar.write('Is the customer a senior citizen?')
-    SeniorCitizen = st.sidebar.selectbox("Senior Citizen", [0, 1], format_func=lambda x: "Yes" if x == 1 else "No", key="senior_citizen")
+    st.subheader('1. Senior Citizen')
+    st.write('Is the customer a senior citizen?')
+    SeniorCitizen = st.selectbox("Senior Citizen", [0, 1], format_func=lambda x: "Yes" if x == 1 else "No", key="senior_citizen")
 
-    st.sidebar.subheader('2. Tech Support')
-    st.sidebar.write('Does the customer have technical support?')
-    TechSupport = st.sidebar.selectbox("Tech Support", [0, 1], format_func=lambda x: "Yes" if x == 1 else "No", key="tech_support")
+    st.subheader('2. Tech Support')
+    st.write('Does the customer have technical support?')
+    TechSupport = st.selectbox("Tech Support", [0, 1], format_func=lambda x: "Yes" if x == 1 else "No", key="tech_support")
 
-    st.sidebar.subheader('3. Contract Type')
-    st.sidebar.write('What type of contract does the customer have?')
-    Contract = st.sidebar.selectbox(
+    st.subheader('3. Contract Type')
+    st.write('What type of contract does the customer have?')
+    Contract = st.selectbox(
         "Contract Type", 
         [0, 1, 2], 
         format_func=lambda x: ["Month-to-month", "One year", "Two year"][x],
         key="contract_type"
     )
 
-    st.sidebar.subheader('4. Internet Service')
-    st.sidebar.write('What type of internet service does the customer have?')
-    InternetService = st.sidebar.selectbox(
+    st.subheader('4. Internet Service')
+    st.write('What type of internet service does the customer have?')
+    InternetService = st.selectbox(
         "Internet Service", 
         [0, 1, 2],
         format_func=lambda x: ["No service", "DSL", "Fiber optic"][x],
         key="internet_service"
     )
 
-    st.sidebar.subheader('5. Total Charges')
-    st.sidebar.write('What are the total charges for the customer\'s service?')
-    TotalCharges = st.sidebar.text_input("Total Charges", "1000.0", key="total_charges")
+    st.subheader('5. Total Charges')
+    st.write('What are the total charges for the customer\'s service?')
+    TotalCharges = st.text_input("Total Charges", "1000.0", key="total_charges")
 
-    st.sidebar.subheader('6. Payment Method')
-    st.sidebar.write('What is the customer\'s payment method?')
-    PaymentMethod = st.sidebar.selectbox(
+    st.subheader('6. Payment Method')
+    st.write('What is the customer\'s payment method?')
+    PaymentMethod = st.selectbox(
         "Payment Method", 
         [0, 1, 2, 3],
         format_func=lambda x: [
