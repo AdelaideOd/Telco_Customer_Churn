@@ -86,7 +86,7 @@ st.subheader("Customer Profile")
 st.write(input_df)
 
 # Display Parameter Definitions
-st.subheader("### Parameter Definitions")
+st.subheader("Parameter Definitions")
 
 st.write("""
 - **SeniorCitizen (0 = No, 1 = Yes):** Indicates whether the customer is a senior citizen.
