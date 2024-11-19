@@ -1,6 +1,23 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import requests
+from streamlit_lottie import st_lottie
+
+# Function to load Lottie animation from a URL
+def load_lottie_url(url: str):
+    r = requests.get(url)
+    if r.status_code != 200:
+        return None
+    return r.json()
+
+# Lottie animation URLs
+lottie_loading = "https://lottie.host/0e5e5fd2-62d9-406e-9733-e393d8ae38c1/bYbgzbADHS.json"
+lottie_success = "https://lottie.host/748445dc-0823-444f-8cd1-6629ccc7d42d/rEsovbxROq.json"
+
+# Load Lottie animations
+loading_animation = load_lottie_url(lottie_loading)
+success_animation = load_lottie_url(lottie_success)
 
 # Load the full pipeline with preprocessing and model
 try:
@@ -88,17 +105,24 @@ st.write(input_df)
 
 # Create a button to run the prediction
 if st.button('Run Prediction'):
+    # Display loading animation while prediction is being made
+    st_lottie(loading_animation, height=200, key="loading")
+
     # Make prediction using the model
     try:
         prediction = pipeline.predict(input_df)
         prediction_proba = pipeline.predict_proba(input_df)[0]  # Get probabilities for both classes
 
+        # Display prediction result
         st.subheader("Prediction Result:")
         st.write(f"Churn Prediction: {'Yes' if prediction[0] == 1 else 'No'}")
         st.write(f"Prediction Probability: Churn: {prediction_proba[1]:.2f}, No Churn: {prediction_proba[0]:.2f}")
+        
+        # Show success animation after prediction is displayed
+        st_lottie(success_animation, height=200, key="success")
 
     except Exception as e:
         st.error(f"An unexpected error occurred: {e}")
 
-
+# Footer
 st.markdown("© BML Group, 2024")
