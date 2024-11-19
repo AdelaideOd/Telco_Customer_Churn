@@ -10,7 +10,13 @@ This project aims to predict customer churn for a telecom company using machine 
 
 This repository is part of a collaborative project created by a group of Data Analysts as a capstone for the Blossom Academy Data Analytics Fellowship. Our goal was to develop predictive models to assess **customer churn** in the telecom industry. This project served as both a practical application of our skills and a showcase of the power of data-driven decision-making.  
 
-Through rigorous analysis and modeling, we aimed to deliver actionable insights that can help telecom companies proactively identify at-risk customers and implement effective retention strategies. The project was also proudly presented during our graduation ceremony, highlighting our dedication and teamwork in addressing real-world challenges.  
+Through rigorous analysis and modeling, we aimed to deliver actionable insights that can help telecom companies proactively identify at-risk customers and implement effective retention strategies. The project was also proudly presented during our graduation ceremony, highlighting our dedication and teamwork in addressing real-world challenges.
+
+### Connect with Us on LinkedIn
+Scan the QR code below to visit our LinkedIn profiles:
+
+![Our LinkedIn Profiles](Our%20LinkedIn%20Profiles.png)
+
 
 
 ---
