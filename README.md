@@ -39,7 +39,7 @@ The dataset used in this project contains customer information such as:
 - **Churn status**  
 
 **Key Features:**  
-- **Rows and Columns:** Before preprocessing: 7043 rows and 21 columns| After preprocessing:7032 rows and 20 columns  
+- **Rows and Columns:** Before preprocessing: 7043 rows and 21 columns | After preprocessing:7032 rows and 20 columns  
 - **Target Variable:** `Churn` (Binary - 0: Non-churning, 1: Churning)  
 
 ---
@@ -72,7 +72,6 @@ Trained and evaluated multiple models, including:
 ### 5. Deployment  
 - Deployed the Logistic Regression model using **Streamlit**, providing an interactive web app for churn prediction.  
 
-## Deployment
 Click the link to experience the deployment aspect of our project, we’ve created a web application which you can explore by clicking the link below:
 https://telcocustomerchurn--bml.streamlit.app/
 
