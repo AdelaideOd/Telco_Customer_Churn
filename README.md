@@ -1,7 +1,17 @@
-# Customer Churn Prediction for a Telecom Company 📊
+# Customer Churn Prediction for BML Group  📊
+
+## About BML Group  
+BML Group is a fictional telecom company at the forefront of innovation, dedicated to enhancing connectivity and improving customer experiences. With a focus on customer-centric solutions, BML Group strives to deliver exceptional value while fostering long-term relationships with its subscribers.  
 
 ## Introduction  
-This project aims to predict customer churn for a telecom company using machine learning techniques. Customer churn, where customers stop using a service, is a critical problem in the telecom industry. By identifying at-risk customers, telecom companies can take proactive measures to improve retention and customer satisfaction.
+This project aims to predict customer churn for a telecom company using machine learning techniques. Customer churn, where customers stop using a service, is a critical problem in the telecom industry. By identifying at-risk customers, telecom companies can take proactive measures to improve retention and customer satisfaction. 
+
+## About This Project  
+
+This repository is part of a collaborative project created by a group of Data Analysts as a capstone for the Blossom Academy Data Analytics Fellowship. Our goal was to develop predictive models to assess **customer churn** in the telecom industry. This project served as both a practical application of our skills and a showcase of the power of data-driven decision-making.  
+
+Through rigorous analysis and modeling, we aimed to deliver actionable insights that can help telecom companies proactively identify at-risk customers and implement effective retention strategies. The project was also proudly presented during our graduation ceremony, highlighting our dedication and teamwork in addressing real-world challenges.  
+
 
 ---
 
