@@ -10,7 +10,7 @@ except Exception as e:
     st.stop()
 
 # Display the logo
-#st.image('bml_logo.png', width=200)
+st.image('bml_logo.png', width=200)
 
 # Display the heading
 st.title("BML Group")
