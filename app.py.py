@@ -22,7 +22,8 @@ selected_features = ['SeniorCitizen', 'TechSupport', 'Contract', 'InternetServic
 def user_input_features():
     st.header('User Input Features')
 
-st.write('Please select the values for each feature below. The selected values will be displayed below as you make your inputs.')
+    st.write('Please select the values for each feature below. The selections will be displayed as you make your inputs.')
+
     st.subheader('1. Senior Citizen')
     st.write('Is the customer a senior citizen?')
     SeniorCitizen = st.selectbox("Senior Citizen", [0, 1], format_func=lambda x: "Yes" if x == 1 else "No", key="senior_citizen")
