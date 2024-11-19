@@ -21,8 +21,7 @@ selected_features = ['SeniorCitizen', 'TechSupport', 'Contract', 'InternetServic
 # Function to gather user input
 def user_input_features():
     st.header('User Input Features')
-
-    st.write('Please select the values for each feature below. As you make your selections, they will be displayed in the table at the bottom of the page.')
+    st.write('Please select the values for each feature below. The selections will be displayed in the table at the bottom of the page as you make your inputs.')
 
     st.subheader('1. Senior Citizen')
     st.write('Is the customer a senior citizen?')
@@ -86,6 +85,17 @@ input_df = user_input_features()
 st.subheader("Customer Profile")
 st.write(input_df)
 
+# Display Parameter Definitions
+st.subheader("### Parameter Definitions")
+
+st.write("""
+- **SeniorCitizen (0 = No, 1 = Yes):** Indicates whether the customer is a senior citizen.
+- **TechSupport (0 = No, 1 = Yes):** Indicates whether the customer has technical support services.
+- **Contract (0 = Month-to-month, 1 = One year, 2 = Two year):** Represents the type of contract the customer has with the company.
+- **InternetService (0 = No service, 1 = DSL, 2 = Fiber optic):** Specifies the type of internet service the customer has.
+- **PaymentMethod (0 = Electronic check, 1 = Mailed check, 2 = Bank transfer (automatic), 3 = Credit card (automatic)):** Describes the customer's payment method for services.
+""")
+
 # Create a button to run the prediction
 if st.button('Run Prediction'):
     # Make prediction using the model
@@ -99,6 +109,5 @@ if st.button('Run Prediction'):
 
     except Exception as e:
         st.error(f"An unexpected error occurred: {e}")
-
 
 st.markdown("© BML Group, 2024")
