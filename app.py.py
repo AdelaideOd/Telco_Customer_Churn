@@ -110,4 +110,6 @@ if st.button('Run Prediction'):
     except Exception as e:
         st.error(f"An unexpected error occurred: {e}")
 
+---
+
 st.markdown("© BML Group, 2024")
