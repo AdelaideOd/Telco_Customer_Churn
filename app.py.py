@@ -18,33 +18,11 @@ st.title("BML Group")
 # Define the selected features for input
 selected_features = ['SeniorCitizen', 'TechSupport', 'Contract', 'InternetService', 'TotalCharges', 'PaymentMethod']
 
-# Uncomment the following block to enable login functionality later
-
-from streamlit_login_auth_ui import login_auth_ui
-
-# Define your credentials (usually these would come from a database or environment variables)
-users = {
-    'username': 'password'
-}
-
-# Create login page
-def login_page():
-    login_successful, username = login_auth_ui(users)
-
-    if login_successful:
-        st.write(f'Welcome {username}!')
-        # Proceed with the rest of your app after login
-    else:
-        st.write('Please log in to continue.')
-
-# Call the login function
-login_page()
-
-
 # Function to gather user input
 def user_input_features():
     st.header('User Input Features')
-    st.write('Please select the values for each feature below. The selections will be displayed in the table at the bottom of the page as you make your inputs.')
+
+    st.write('Please select the values for each feature below. As you make your selections, they will be displayed in the table at the bottom of the page.')
 
     st.subheader('1. Senior Citizen')
     st.write('Is the customer a senior citizen?')
@@ -121,5 +99,6 @@ if st.button('Run Prediction'):
 
     except Exception as e:
         st.error(f"An unexpected error occurred: {e}")
+
 
 st.markdown("© BML Group, 2024")
