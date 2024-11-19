@@ -22,7 +22,7 @@ selected_features = ['SeniorCitizen', 'TechSupport', 'Contract', 'InternetServic
 def user_input_features():
     st.header('User Input Features')
 
-    st.write('Please select the values for each feature below. The selections will be displayed as you make your inputs.')
+    st.write('Please select the values for each feature below. As you make your selections, they will be displayed in the table at the bottom of the page.')
 
     st.subheader('1. Senior Citizen')
     st.write('Is the customer a senior citizen?')
