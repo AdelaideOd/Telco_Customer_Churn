@@ -72,7 +72,8 @@ Trained and evaluated multiple models, including:
 ### 5. Deployment  
 - Deployed the Logistic Regression model using **Streamlit**, providing an interactive web app for churn prediction.  
 
-## Usage   
+## Deployment
+Click the link to experience the deployment aspect of our project, we’ve created a web application which you can explore by clicking the link below:
 https://telcocustomerchurn--bml.streamlit.app/
 
 ---
